@@ -1,19 +1,7 @@
 import PropTypes from 'prop-types';
 
 
-function formatPrice(value) {
-  const priceFormatter = new Intl.NumberFormat('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })
-  return priceFormatter.format(value)
-}
-
-export default function ShopItemFunc( { item } ) {
-  ShopItemFunc.propTypes = {
-    item: PropTypes.object.isRequired,
-  };
-  
+export default function ShopItemFunc( { item } ) {  
   return (
     <div className="main-content">
       <h2>{item.brand}</h2>
@@ -29,10 +17,14 @@ export default function ShopItemFunc( { item } ) {
       <div className="divider"></div>
       <div className="purchase-info">
         <div className="price">
-          {item.currency}{formatPrice(item.price)}
+          {item.currency}{item.price.toFixed(2)}
         </div>
         <button>Добавить в корзину</button>
       </div>
     </div>
   )
 }
+
+ShopItemFunc.propTypes = {
+  item: PropTypes.object.isRequired,
+};
